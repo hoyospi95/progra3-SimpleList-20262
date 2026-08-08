@@ -1,2 +1,2 @@
 # progra3-SimpleList-20262
-Implementación de la interface List
+Construcción de la clase  SimpleList<E> como clase derivada de AbstractList<E> que implementa List<E>
