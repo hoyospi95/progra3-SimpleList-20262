@@ -2,4 +2,4 @@
 Construcción colaborativa de la clase  SimpleList
 
 ```java
-public class SimpleList<E> extends AbstractList<E> implements List<E>
+public class SimpleList<E> implements Collection<E>, List<E>
