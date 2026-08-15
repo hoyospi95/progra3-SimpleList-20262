@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.ListIterator;
 
 public class SimpleList<E> implements Collection<E>, List<E> {
-
+	private Node<E> head;
+	
 	@Override
 	public int size() {
 		// TODO Auto-generated method stub
