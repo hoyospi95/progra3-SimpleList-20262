@@ -1,3 +1,5 @@
+package co.edu.uptc.structures;
+
 public class Node<E> {
     private E value;
     private Node<E> next;
