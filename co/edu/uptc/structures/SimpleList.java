@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.ListIterator;
 
 public class SimpleList<E> implements Collection<E>, List<E> {
-
+	private Node<E> head;
+	
 	@Override
 	public int size() {
 		// TODO Auto-generated method stub
@@ -45,8 +46,17 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 
 	@Override
 	public boolean add(E e) {
-		// TODO Auto-generated method stub
-		return false;
+		Node<E> newNode = new Node<E>(e);
+		if(head == null){
+			head = newNode;
+		}else{
+			Node<E> actual = head;
+			while(actual.getNext() != null){
+				actual = actual.getNext();
+			}
+			actual.setNext(newNode);
+		}
+		return true;
 	}
 
 	@Override
