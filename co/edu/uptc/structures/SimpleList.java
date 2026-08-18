@@ -46,15 +46,15 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 
 	@Override
 	public boolean add(E e) {
-		Node<E> aux = new Node<E>(e);
+		Node<E> newNode = new Node<E>(e);
 		if(head == null){
-			head = aux;
+			head = newNode;
 		}else{
 			Node<E> actual = head;
 			while(actual.getNext() != null){
 				actual = actual.getNext();
 			}
-			actual.setNext(aux);
+			actual.setNext(newNode);
 		}
 		return true;
 	}
