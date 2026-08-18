@@ -46,8 +46,17 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 
 	@Override
 	public boolean add(E e) {
-		// TODO Auto-generated method stub
-		return false;
+		Node<E> aux = new Node<E>(e);
+		if(head == null){
+			head = aux;
+		}else{
+			Node<E> actual = head;
+			while(actual.getNext() != null){
+				actual = actual.getNext();
+			}
+			actual.setNext(aux);
+		}
+		return true;
 	}
 
 	@Override
