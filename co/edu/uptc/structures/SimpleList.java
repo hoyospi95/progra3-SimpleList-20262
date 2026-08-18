@@ -8,6 +8,11 @@ import java.util.ListIterator;
 public class SimpleList<E> implements Collection<E>, List<E> {
 	private Node<E> head;
 	
+	
+	public SimpleList() {
+		head = null;
+	}
+
 	@Override
 	public int size() {
 		// TODO Auto-generated method stub
@@ -153,6 +158,11 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 	public List<E> subList(int fromIndex, int toIndex) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public String toString() {
+		return "SimpleList [head=" + head + "]";
 	}
 
 }
