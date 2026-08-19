@@ -217,8 +217,18 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 
 	@Override
 	public boolean removeAll(Collection<?> c) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean result = false;
+		Node<E> actualNode = this.head;
+		while (actualNode != null) {
+			Node<E> nextNode = actualNode.getNext();
+			Node<E> temporalNode = actualNode;
+			if (c.stream().filter(e -> e.equals(temporalNode.getValue())).findFirst().orElse(null) != null) {
+				this.remove(actualNode.getValue());
+				result = true;
+			}
+			actualNode = nextNode;
+		}
+		return result;
 	}
 
 	@Override
