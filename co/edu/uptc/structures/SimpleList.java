@@ -108,8 +108,7 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-		
+		head = null;
 	}
 
 	@Override
