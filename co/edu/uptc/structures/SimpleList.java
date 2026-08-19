@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Objects;
 
 public class SimpleList<E> implements Collection<E>, List<E> {
 	private Node<E> head;
@@ -14,8 +15,13 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		Node<E> current = head;
+		int count = 0;
+		while (current != null) {
+			count += 1;
+			current = current.getNext();
+		}
+		return count;
 	}
 
 	@Override
@@ -101,8 +107,7 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-
+		head = null;
 	}
 
 	@Override
@@ -144,8 +149,16 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 
 	@Override
 	public int indexOf(Object o) {
-		// TODO Auto-generated method stub
-		return 0;
+		Node<E> aux = head;
+		int counter = 0;
+		while(aux != null){
+			if(aux.getValue().equals(o)){
+				return counter;
+			}
+			aux = aux.getNext();
+			counter++;
+		}
+		return -1;
 	}
 
 	@Override
