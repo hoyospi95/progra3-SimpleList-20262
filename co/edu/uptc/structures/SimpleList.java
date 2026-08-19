@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.lang.reflect.Array;
 import java.util.Objects;
 
 public class SimpleList<E> implements Collection<E>, List<E> {
@@ -97,8 +98,21 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 
 	@Override
 	public <T> T[] toArray(T[] a) {
-		// TODO Auto-generated method stub
-		return null;
+		int size = size(); 
+		if (a.length < size) {
+			a = (T[]) Array.newInstance(
+        	a.getClass().getComponentType(), size);
+		}
+
+		int i = 0;
+		for (Object element : this) { 
+			a[i++] = (T) element;
+		}
+
+		if (a.length > size) {
+			a[size] = null;
+		}
+		return a;
 	}
 
 	@Override
