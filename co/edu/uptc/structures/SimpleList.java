@@ -1,14 +1,11 @@
 package co.edu.uptc.structures;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 public class SimpleList<E> implements Collection<E>, List<E> {
 	private Node<E> head;
-	
-	
+
+
 	public SimpleList() {
 		head = null;
 	}
@@ -31,10 +28,51 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 		return false;
 	}
 
+	/**
+	 * Permite recorrer los elementos de la lista uno por uno.
+	 *
+	 * @return un iterador para recorrer la lista
+	 */
 	@Override
 	public Iterator<E> iterator() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Iterator<E>() {
+
+			// Guarda el nodo que se está recorriendo actualmente.
+			// Al comenzar, apunta al primer nodo de la lista.
+			private Node<E> actual = head;
+
+			/**
+			 * Comprueba si todavía hay un elemento por recorrer.
+			 *
+			 * @return true si actual apunta a un nodo,
+			 *         false si ya se llegó al final de la lista
+			 */
+			@Override
+			public boolean hasNext() {
+				return actual != null;
+			}
+
+			/**
+			 * Obtiene el elemento del nodo actual y pasa al siguiente nodo.
+			 *
+			 * @return el valor del nodo actual
+			 * @throws NoSuchElementException si ya no quedan elementos
+			 */
+			@Override
+			public E next() {
+				if (actual == null) {
+					throw new NoSuchElementException();
+				}
+
+				// Guardamos el valor del nodo actual.
+				E value = actual.getValue();
+
+				// Pasamos al siguiente nodo de la lista.
+				actual = actual.getNext();
+
+				return value;
+			}
+		};
 	}
 
 	@Override
@@ -103,7 +141,7 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 	@Override
 	public void clear() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -121,7 +159,7 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 	@Override
 	public void add(int index, E element) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
