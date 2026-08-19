@@ -134,7 +134,7 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 			aux = aux.getNext();
 		}
 
-		if (index < 0 || index > count) {
+		if (index < 0 || index >= count) {
 			throw new IndexOutOfBoundsException("El indice esta fuera del rango: " + index);
 		}
 
