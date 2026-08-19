@@ -115,7 +115,7 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 		Node currentNode = head;
 		int currentIndex = 0;
 
-		while (currentNode.getNext() != null) {
+		while (currentNode != null) {
 			if (currentIndex == index) {
 				return currentNode.getValue();
 			}
@@ -124,6 +124,8 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 				currentNode = currentNode.getNext();
 			}
 		}
+		
+		return null;
 	}
 
 	@Override
