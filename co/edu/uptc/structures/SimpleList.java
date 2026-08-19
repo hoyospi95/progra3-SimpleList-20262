@@ -7,8 +7,7 @@ import java.util.ListIterator;
 
 public class SimpleList<E> implements Collection<E>, List<E> {
 	private Node<E> head;
-	
-	
+
 	public SimpleList() {
 		head = null;
 	}
@@ -52,11 +51,11 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 	@Override
 	public boolean add(E e) {
 		Node<E> newNode = new Node<E>(e);
-		if(head == null){
+		if (head == null) {
 			head = newNode;
-		}else{
+		} else {
 			Node<E> actual = head;
-			while(actual.getNext() != null){
+			while (actual.getNext() != null) {
 				actual = actual.getNext();
 			}
 			actual.setNext(newNode);
@@ -96,14 +95,38 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 
 	@Override
 	public boolean retainAll(Collection<?> c) {
-		// TODO Auto-generated method stub
-		return false;
+
+		boolean result = false;
+		Node<E> current = head;
+		Node<E> previous = null;
+
+		while (current != null) {
+
+			if (c.contains(current.getValue())) {
+
+				previous = current;
+				current = current.getNext();
+
+			} else {
+				result = true;
+			}
+			if (previous == null) {
+				head = current.getNext();
+			}else{ 
+				previous.setNext(current.getNext());
+			}
+
+			current =current.getNext();
+
+		}
+
+		return result;
 	}
 
 	@Override
 	public void clear() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -121,7 +144,7 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 	@Override
 	public void add(int index, E element) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
