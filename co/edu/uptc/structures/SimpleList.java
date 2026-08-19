@@ -75,9 +75,13 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 	}
 
 	@Override
-	public boolean containsAll(Collection<?> c) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean containsAll(Collection<?> c) throws UnsupportedOperationException, ClassCastException, NullPointerException, IllegalArgumentException{
+		for (Object object : c) {
+			if(!contains(object)){
+				return false;
+			}
+		}
+		return true;
 	}
 
 	@Override
