@@ -129,8 +129,32 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 
 	@Override
 	public boolean retainAll(Collection<?> c) {
-		// TODO Auto-generated method stub
-		return false;
+
+		boolean result = false;
+		Node<E> current = head;
+		Node<E> previous = null;
+
+		while (current != null) {
+
+			if (c.contains(current.getValue())) {
+
+				previous = current;
+				current = current.getNext();
+
+			} else {
+				result = true;
+			}
+			if (previous == null) {
+				head = current.getNext();
+			}else{ 
+				previous.setNext(current.getNext());
+			}
+
+			current =current.getNext();
+
+		}
+
+		return result;
 	}
 
 	@Override
