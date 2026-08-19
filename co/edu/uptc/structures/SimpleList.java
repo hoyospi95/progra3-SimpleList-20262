@@ -66,7 +66,28 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 
 	@Override
 	public boolean remove(Object o) {
-		// TODO Auto-generated method stub
+		if (isEmpty()) return false;
+		if (o == null) throw new NullPointerException();
+		if (o.getClass() != head.getValue().getClass()) throw new ClassCastException();
+		
+		if (head.getValue().equals(o)) {
+			head = head.getNext();
+			return true;
+		}
+		
+		Node<E> prev = head;
+		Node<E> next = head.getNext();
+
+		while (next != null) {
+			if (next.getValue().equals(o)) {
+				prev.setNext(next.getNext());
+				return true;
+			}
+
+			next = next.getNext();
+			prev = prev.getNext();
+		}
+
 		return false;
 	}
 
