@@ -155,8 +155,13 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 
 	@Override
 	public boolean addAll(Collection<? extends E> c) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean modified = false;
+		for (E element : c) {
+			if (add(element)) {
+				modified = true;
+			}
+		}
+		return modified;
 	}
 
 	@Override
