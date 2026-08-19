@@ -91,9 +91,10 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 	public boolean removeAll(Collection<?> c) {
 		boolean result = false;
 		Node<E> actualNode = this.head;
-		while (actualNode != null){
+		while (actualNode != null) {
 			Node<E> nextNode = actualNode.getNext();
-			if(c.stream().filter(e -> e.equals(nextNode.getValue())).findFirst().orElse(null) != null){
+			Node<E> temporalNode = actualNode;
+			if (c.stream().filter(e -> e.equals(temporalNode.getValue())).findFirst().orElse(null) != null) {
 				this.remove(actualNode.getValue());
 				result = true;
 			}
