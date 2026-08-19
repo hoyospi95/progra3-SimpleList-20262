@@ -15,8 +15,13 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		Node<E> current = head;
+		int count = 0;
+		while (current != null) {
+			count += 1;
+			current = current.getNext();
+		}
+		return count;
 	}
 
 	@Override
