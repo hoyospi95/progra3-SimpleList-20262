@@ -88,8 +88,33 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 
 	@Override
 	public boolean addAll(int index, Collection<? extends E> c) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean isAdded = false;
+
+        if (index >= 0 && index <= this.size()) { 
+            if (!c.isEmpty()) {
+                Node<E> predecessor = null;
+                Node<E> successor = this.head;
+                for (int i = 0; i < index; i++) {
+                    predecessor = successor;
+                    successor = successor.getNext();
+                }
+                Node<E> current = predecessor;
+                for (E element : c) {
+                    Node<E> newNode = new Node<>(element);
+                    if (current == null) {
+                        this.head = newNode;
+                    } else {
+                        current.setNext(newNode);
+                    }
+                    current = newNode; 
+                }
+                if (current != null) {
+                    current.setNext(successor);
+                }
+                isAdded = true;
+            }
+        }
+        return isAdded;
 	}
 
 	@Override
