@@ -39,8 +39,15 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 
 	@Override
 	public Object[] toArray() {
-		// TODO Auto-generated method stub
-		return null;
+		int size = size();
+		Object[] array = new Object[ size ];
+		Node aux = head;
+		for (int i=0; i< size; i++){
+			array[i] = aux.getValue();
+			aux = aux.getNext();
+		}
+
+		return array;
 	}
 
 	@Override
