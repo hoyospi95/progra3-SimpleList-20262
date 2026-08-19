@@ -273,8 +273,34 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 
 	@Override
 	public E remove(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		int count=0;
+		Node<E> aux = head;
+
+		while (aux != null) {
+			count++;
+			aux = aux.getNext();
+		}
+
+		if (index < 0 || index >= count) {
+			throw new IndexOutOfBoundsException("El indice esta fuera del rango: " + index);
+		}
+
+		if (index == 0) {
+			E removed = head.getValue();
+			head = head.getNext();
+			return removed;
+		}
+
+		Node<E> previous = head;
+
+		for (int i = 0; i < index - 1; i++) {
+			previous = previous.getNext();
+		}
+
+		Node<E> current = previous.getNext();
+		E removed = current.getValue();
+		previous.setNext(current.getNext());
+		return removed;
 	}
 
 	@Override
