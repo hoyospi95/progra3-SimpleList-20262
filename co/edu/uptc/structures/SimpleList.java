@@ -32,7 +32,13 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 
 	@Override
 	public boolean contains(Object o) {
-		// TODO Auto-generated method stub
+		Node<E> aux = head;
+		while (aux != null) {
+			if (o == null ? aux.getValue() == null : o.equals(aux.getValue())) {
+				return true;
+			}
+			aux = aux.getNext();
+		}
 		return false;
 	}
 
