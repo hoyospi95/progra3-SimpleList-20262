@@ -256,18 +256,70 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 		return 0;
 	}
 
+
 	@Override
 	public ListIterator<E> listIterator() {
-		// TODO Auto-generated method stub
-		return null;
+
+	    ListIterator<E> iterator = new ListIterator<E>() {
+
+	        Node<E> actual = head;
+
+	        @Override
+	        public boolean hasNext() {
+	            return actual != null;
+	        }
+
+	        @Override
+	        public E next() {
+	            E element = actual.getValue();
+	            actual = actual.getNext();
+	            return element;
+	        }
+
+	        @Override
+	        public boolean hasPrevious() {
+	            return false;
+	        }
+
+	        @Override
+	        public E previous() {
+	            return null;
+	        }
+
+	        @Override
+	        public int nextIndex() {
+	            return 0;
+	        }
+
+	        @Override
+	        public int previousIndex() {
+	            return -1;
+	        }
+
+	        @Override
+	        public void remove() {
+	        }
+
+	        @Override
+	        public void set(E e) {
+	        }
+
+	        @Override
+	        public void add(E e) {
+	        }
+	    };
+
+	    return iterator;
 	}
+
+
 
 	@Override
 	public ListIterator<E> listIterator(int index) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	@Override
 	public List<E> subList(int fromIndex, int toIndex) {
 		// TODO Auto-generated method stub
