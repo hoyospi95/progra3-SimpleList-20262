@@ -35,10 +35,51 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 		return false;
 	}
 
+	/**
+	 * Permite recorrer los elementos de la lista uno por uno.
+	 *
+	 * @return un iterador para recorrer la lista
+	 */
 	@Override
 	public Iterator<E> iterator() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Iterator<E>() {
+
+			// Guarda el nodo que se está recorriendo actualmente.
+			// Al comenzar, apunta al primer nodo de la lista.
+			private Node<E> actual = head;
+
+			/**
+			 * Comprueba si todavía hay un elemento por recorrer.
+			 *
+			 * @return true si actual apunta a un nodo,
+			 *         false si ya se llegó al final de la lista
+			 */
+			@Override
+			public boolean hasNext() {
+				return actual != null;
+			}
+
+			/**
+			 * Obtiene el elemento del nodo actual y pasa al siguiente nodo.
+			 *
+			 * @return el valor del nodo actual
+			 * @throws NoSuchElementException si ya no quedan elementos
+			 */
+			@Override
+			public E next() {
+				if (actual == null) {
+					throw new NoSuchElementException();
+				}
+
+				// Guardamos el valor del nodo actual.
+				E value = actual.getValue();
+
+				// Pasamos al siguiente nodo de la lista.
+				actual = actual.getNext();
+
+				return value;
+			}
+		};
 	}
 
 	@Override
