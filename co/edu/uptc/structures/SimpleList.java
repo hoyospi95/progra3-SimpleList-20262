@@ -138,8 +138,17 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 
 	@Override
 	public int lastIndexOf(Object o) {
-		// TODO Auto-generated method stub
-		return 0;
+		Node<E> actual = head;	
+		int i = -1;
+		int j = 0;
+		while(actual != null){
+			if(actual.getValue().equals(o)){
+				i = j;
+			}
+			j++;
+			actual = actual.getNext();
+		}
+		return i;
 	}
 
 	@Override
