@@ -148,15 +148,6 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 		return null;
 	}
 
-	// metodo auxiliar para usar en listIterator(int index)
-	private Node<E> getNode(int index) {
-		Node<E> actual = head;
-		for (int i = 0; i < index; i++) {
-			actual = actual.getNext();
-		}
-		return actual;
-	}
-
 	@Override
 	public ListIterator<E> listIterator(int index) {
 		if (index < 0 || index > size()) {
@@ -164,7 +155,7 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 		}
 		return new ListIterator<E>() {
 			private int currentIndex = index;
-			private Node<E> currentNode = getNode(currentIndex);
+			private Node<E> currentNode = (Node<E>) get(currentIndex);
 			private Node<E> lastNode = null;
 
 			@Override
@@ -195,7 +186,7 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 					throw new NoSuchElementException();
 				}
 				currentIndex--;
-				currentNode = getNode(currentIndex);
+				currentNode = (Node<E>) get(currentIndex);
 				lastNode = currentNode;
 				return currentNode.getValue();
 			}
@@ -225,7 +216,7 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 					} else {
 						lastNodeIndex = currentIndex - 1;
 					}
-					previous = getNode(lastNodeIndex - 1);
+					previous = (Node<E>) get(lastNodeIndex - 1);
 				}
 				if (previous == null) {
 					head = lastNode.getNext();
@@ -257,7 +248,7 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 					newNode.setNext(head);
 					head = newNode;
 				} else {
-					Node<E> previous = getNode(currentIndex - 1);
+					Node<E> previous = (Node<E>) get(currentIndex - 1);
 					previous.setNext(newNode);
 					newNode.setNext(currentNode);
 				}
