@@ -108,8 +108,22 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 
 	@Override
 	public E get(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		if (index < 0 || head == null) {
+			return null;
+		}
+
+		Node currentNode = head;
+		int currentIndex = 0;
+
+		while (currentNode.getNext() != null) {
+			if (currentIndex == index) {
+				return currentNode.getValue();
+			}
+			else {
+				currentIndex ++;
+				currentNode = currentNode.getNext();
+			}
+		}
 	}
 
 	@Override
