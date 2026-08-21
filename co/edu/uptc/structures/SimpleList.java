@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
-import java.lang.reflect.Array;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 public class SimpleList<E> implements Collection<E>, List<E> {
@@ -434,8 +434,113 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 
 	@Override
 	public ListIterator<E> listIterator(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		if (index < 0 || index > size()) {
+			throw new IndexOutOfBoundsException();
+		}
+		return new ListIterator<E>() {
+			private int currentIndex = index;
+			private Node<E> currentNode = (Node<E>) get(currentIndex);
+			private Node<E> lastNode = null;
+
+			@Override
+			public boolean hasNext() {
+				return currentIndex < size();
+			}
+
+			@Override
+			public E next() {
+				if (!hasNext()) {
+					throw new NoSuchElementException();
+				}
+				lastNode = currentNode;
+				E data = currentNode.getValue();
+				currentNode = currentNode.getNext();
+				currentIndex++;
+				return data;
+			}
+
+			@Override
+			public boolean hasPrevious() {
+				return currentIndex > 0;
+			}
+
+			@Override
+			public E previous() {
+				if (!hasPrevious()) {
+					throw new NoSuchElementException();
+				}
+				currentIndex--;
+				currentNode = (Node<E>) get(currentIndex);
+				lastNode = currentNode;
+				return currentNode.getValue();
+			}
+
+			@Override
+			public int nextIndex() {
+				return currentIndex;
+			}
+
+			@Override
+			public int previousIndex() {
+				return currentIndex - 1;
+			}
+
+			@Override
+			public void remove() {
+				if (lastNode == null) {
+					throw new IllegalStateException();
+				}
+				Node<E> previous;
+				if (lastNode == head) {
+					previous = null;
+				} else {
+					int lastNodeIndex;
+					if (currentNode == lastNode) {
+						lastNodeIndex = currentIndex;
+					} else {
+						lastNodeIndex = currentIndex - 1;
+					}
+					previous = (Node<E>) get(lastNodeIndex - 1);
+				}
+				if (previous == null) {
+					head = lastNode.getNext();
+				} else {
+					previous.setNext(lastNode.getNext());
+				}
+				if (currentNode == lastNode) {
+					currentNode = lastNode.getNext();
+				} else {
+					currentIndex--;
+				}
+				lastNode = null;
+			}
+
+			@Override
+			public void set(E e) {
+				if (lastNode == null) {
+					throw new IllegalArgumentException();
+				}
+
+				lastNode.setValue(e);
+
+			}
+
+			@Override
+			public void add(E e) {
+				Node<E> newNode = new Node<E>(e);
+				if (currentIndex == 0) {
+					newNode.setNext(head);
+					head = newNode;
+				} else {
+					Node<E> previous = (Node<E>) get(currentIndex - 1);
+					previous.setNext(newNode);
+					newNode.setNext(currentNode);
+				}
+				currentIndex++;
+				lastNode = null;
+
+			}
+		};
 	}
 	
 	@Override
