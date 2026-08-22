@@ -239,23 +239,19 @@ public class SimpleList<E> implements Collection<E>, List<E> {
 		Node<E> previous = null;
 
 		while (current != null) {
-
-			if (c.contains(current.getValue())) {
-
-				previous = current;
+			if(c.contains(current.getValue())){
+				previous =current;
 				current = current.getNext();
-
-			} else {
+			}else{
 				result = true;
+				if(previous == null){
+					head = current.getNext();
+				}else{
+					previous.setNext(current.getNext());
+				}
+				current = current.getNext();
 			}
-			if (previous == null) {
-				head = current.getNext();
-			}else{ 
-				previous.setNext(current.getNext());
-			}
-
-			current =current.getNext();
-
+			
 		}
 
 		return result;
